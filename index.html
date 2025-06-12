@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Para Laura ❤️</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      height: 100vh;
+      overflow: hidden;
+      position: relative;
+    }
+
+#encerramento {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  color: white;
+  padding: 40px;
+  text-align: center;
+  opacity: 0;
+  transition: opacity 1.5s ease;
+}
+
+#encerramento img#fotoFinal {
+  max-height: 60vh;
+  border-radius: 15px;
+  margin-bottom: 30px;
+  box-shadow: 0 0 20px rgba(255,255,255,0.3);
+}
+
+#mensagemFinal p {
+  font-size: 1.3em;
+  line-height: 1.3;
+  text-shadow: 2px 2px 5px rgba(0,0,0,0.7);
+}
+
+
+    body::before {
+      content: "";
+      background: url('WhatsApp Image 2025-06-12 at 16.50.27.jpeg') no-repeat center center fixed;
+      background-size: cover;
+      filter: blur(10px) brightness(0.6);
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      z-index: -2;
+      opacity: 0;
+      transition: opacity 1.5s ease-in-out;
+    }
+
+    body.fundoAtivo::before {
+      opacity: 1;
+    }
+
+    #intro, #main {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      transition: opacity 1s;
+      text-align: center;
+    }
+
+    #intro {
+      background-color: #000;
+      color: #0f0;
+      z-index: 2;
+      pointer-events: all;
+      
+    }
+
+#intro button {
+  background-color: #0f0;
+  color: #111;
+  padding: 15px 30px;
+  font-size: 1.1em;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+#intro button:hover {
+  background-color: #3f3;
+  transform: scale(1.05);
+}
+
+
+    #main {
+      opacity: 0;
+      pointer-events: none;
+      z-index: 1;
+      padding: 20px;
+    }
+
+.frase {
+  font-size: 1.8em;
+  color: #ffffff;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+  margin-top: 30px;
+  margin-bottom: 20px;
+  padding: 0 30px;
+  max-width: 90%;
+  text-align: center;
+  border-right: 2px solid rgba(255,255,255,0.6);
+  overflow: hidden;
+  white-space: normal; /* <- Isso aqui! */
+  word-wrap: break-word;
+}
+
+
+
+    .img-container img {
+      max-width: 80%;
+      max-height: 60vh;
+      border-radius: 15px;
+      padding: 10px;
+      border: 5px solid #ffcce0;
+      box-shadow: 0 0 20px rgba(255,192,203,0.6);
+    }
+
+    #nextBtn {
+      margin-top: 30px;
+      padding: 12px 30px;
+      font-size: 1.1em;
+      background-color: #ff3399;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    #nextBtn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 15px #ff99cc;
+    }
+
+    .final {
+      font-size: 1.6em;
+      color: #fff;
+      margin-top: 40px;
+    }
+
+    .heart-pulse {
+      font-size: 80px;
+      animation: pulse 1s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+      100% { transform: scale(1); }
+    }
+
+    .bubble {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: #fff;
+      color: #111;
+      border-radius: 10px;
+      padding: 20px 30px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+      max-width: 90%;
+      z-index: 9999;
+      font-size: 1.1em;
+      animation: fadeIn 0.5s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translate(-50%, -60%); }
+      to { opacity: 1; transform: translate(-50%, -50%); }
+    }
+
+    .particles {
+      position: fixed;
+      width: 100%; height: 100%;
+      top: 0; left: 0;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .particles span {
+      position: absolute;
+      width: 10px; height: 10px;
+      background: pink;
+      border-radius: 50%;
+      animation: floatUp 10s infinite;
+      opacity: 0.6;
+    }
+
+    @keyframes floatUp {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-100vh); opacity: 0; }
+    }
+
+#popupIntro {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.7);
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+
+
+
+    #popupIntro .box {
+      background: #fff;
+      padding: 30px;
+      border-radius: 15px;
+      text-align: center;
+      max-width: 400px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.3);
+    }
+
+    #popupIntro .box p {
+      font-size: 1.2em;
+      margin-bottom: 20px;
+    }
+
+    #popupIntro .box button {
+      padding: 10px 25px;
+      background: #ff3399;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1em;
+    }
+  </style>
+</head>
+<body>
+
+<div class="particles" id="particles"></div>
+
+<div id="intro">
+  <h1>Verificando credenciais do sistema...</h1>
+  <button style="z-index: 999" onclick="iniciar()" type="button">Acessar Painel</button>
+
+</div>
+
+
+<div id="popupIntro">
+  <div class="box">
+    <p>ESTÁ PREPARADA?<br>ESTÁ OUVINDO A MÚSICA?<br>SABE O QUE TE ESPERA?</p>
+    <button onclick="fecharPopup()">COMEÇAR</button>
+  </div>
+</div>
+
+<div id="main">
+  <div class="frase" id="frase"></div>
+  <div class="img-container"><img id="foto" src="" alt="Foto"></div>
+  <button id="nextBtn" onclick="proximoSlide()">▶ Próximo</button>
+  <div class="final hidden" id="finalMsg">
+    <div class="heart-pulse">❤️</div>
+  </div>
+</div>
+
+
+<div id="encerramento" class="hidden">
+  <img src="WhatsApp Image 2025-06-12 at 16.50.27.jpeg" id="fotoFinal">
+  <div id="mensagemFinal">
+    <p>
+      Laura...<br><br>
+      Você sobreviveu aos pop-ups, ignorou o tempo, teve paciência com meu botão de “próximo”...<br><br>
+      Então acho que merece a verdade:<br><br>
+      Você é a melhor parte da minha vida.<br>
+      Minha calmaria no caos, meu abrigo no mundo.<br>
+      Eu faria tudo de novo, só pra viver isso com você.<br><br>
+      Agora aperta ESC e vem me dar um beijo. 💋
+    </p>
+  </div>
+</div>
+
+
+<audio id="musica" loop>
+  <source src="na_hora_de_amar.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  let lastInteraction = Date.now();
+  let i = 0;
+  let lastClick = Date.now();
+
+const frases = [
+  "Quando te vi, meu mundo parou, e o coração acelerou.",
+  "Na hora de amar, pensei em você... e o amor aconteceu sem porquê.",
+  "Você chegou sem avisar, e agora é o meu lugar.",
+  "Foi no teu sorriso que eu me encontrei, e nunca mais me separei.",
+  "Teu abraço é calmaria, minha melhor melodia.",
+  "Laura, te amar é meu dom, contigo é onde eu me sinto bom.",
+  "A cada toque teu, o mundo inteiro ficou meu.",
+  "Nos teus olhos fiz morada, tua presença é minha estrada.",
+  "Você é verso e canção, é minha melhor emoção.",
+  "Meu destino é você, e disso eu não vou me esconder.",
+  "Até no silêncio, a gente se entende, o amor aqui nunca se rende.",
+  "Você é minha oração, resposta do meu coração.",
+  "Se for pra viver, que seja com você.",
+  "Te amar foi meu maior acerto, e eu repito isso de peito aberto.",
+  "Laura, meu amor é seu, do começo, meio e até o breu."
+];
+
+
+const imagens = [
+  "WhatsApp Image 2025-06-12 at 16.23.44 (2).jpeg",
+  "WhatsApp Image 2025-06-12 at 16.23.44 (3).jpeg",
+  "WhatsApp Image 2025-06-12 at 16.23.44 (4).jpeg",
+  "WhatsApp Image 2025-06-12 at 16.23.44.jpeg",
+  "WhatsApp Image 2025-06-12 at 16.23.45 (1).jpeg",
+  "WhatsApp Image 2025-06-12 at 16.23.45 (2).jpeg",
+  "WhatsApp Image 2025-06-12 at 16.23.45 (3).jpeg",
+  "WhatsApp Image 2025-06-12 at 16.23.45.jpeg",
+  "WhatsApp Image 2025-06-12 at 16.23.46 (1).jpeg",
+  "WhatsApp Image 2025-06-12 at 16.23.44 (1).jpeg",
+  "WhatsApp Image 2025-06-12 at 16.23.46 (3).jpeg",
+  "WhatsApp Image 2025-06-12 at 16.23.46 (4).jpeg",
+  "WhatsApp Image 2025-06-12 at 16.23.46.jpeg",
+  "WhatsApp Image 2025-06-12 at 16.23.47.jpeg",
+  "WhatsApp Image 2025-06-12 at 16.23.46 (2).jpeg"
+];
+
+const clickFrases = [
+  "Oxi, calma! Nem respirei ainda nesse slide…",
+  "Tá com pressa, é? O amor não corre, ele caminha bonito.",
+  "Ei! A foto nem terminou de sorrir ainda!",
+  "Nem Jesus transformou água tão rápido assim.",
+  "Isso aqui é um poema, não um TikTok!",
+  "Pega leve! Deixa o coração acompanhar.",
+  "Tu tá querendo zerar o amor em 2 minutos, é?",
+  "Calma, amor... tô tentando te emocionar, não te dar um infarto.",
+  "Nem terminei de suspirar e você já clicou!",
+  "Dá um gole d’água, respira… e volta."
+];
+
+const tempoFrases = [
+  "Você tá viva aí? Ou foi parar no mundo da Lua?",
+  "Se fosse eu, já teria mandado um ‘Oi sumida’!",
+  "A saudade desse próximo slide já tá batendo.",
+  "Quer que eu avance sozinho? Porque eu vou, viu?",
+  "Esse silêncio tá parecendo briga de casal…",
+  "Cê foi pegar um lanche e esqueceu de mim?",
+  "Ô saudade do seu clique!",
+  "Até a música tá perguntando por você.",
+  "Lauraaa? Tá aí? Ou caiu da cadeira de emoção?",
+  "Bora, mulher! O próximo slide tá lindo!"
+];
+
+
+  window.iniciar = function () {
+    const musica = document.getElementById("musica");
+    const popup = document.getElementById("popupIntro");
+
+    if (popup.style.display === "flex") return;
+
+    musica.play().catch((err) => {
+      console.log("Erro ao tentar tocar a música:", err);
+    });
+
+    popup.style.display = "flex";
+    popup.style.opacity = "1";
+  };
+
+  window.fecharPopup = function () {
+    const popup = document.getElementById("popupIntro");
+    popup.style.opacity = "0";
+    setTimeout(() => {
+      popup.style.display = "none";
+    }, 300);
+
+    document.getElementById("intro").style.opacity = 0;
+
+    setTimeout(() => {
+      document.getElementById("intro").style.display = "none";
+      document.getElementById("main").style.opacity = 1;
+      document.getElementById("main").style.pointerEvents = "all";
+      document.body.classList.add("fundoAtivo");
+      mostrarSlide();
+      monitorarTempo();
+      gerarParticulas();
+    }, 1000);
+  };
+
+  function mostrarSlide() {
+    const fraseEl = document.getElementById("frase");
+    fraseEl.innerText = "";
+    document.getElementById("foto").src = imagens[i];
+
+    let j = 0;
+    const texto = frases[i];
+    const typing = setInterval(() => {
+      fraseEl.innerText = texto.slice(0, j);
+      j++;
+      if (j > texto.length) clearInterval(typing);
+    }, 40);
+  }
+
+  window.proximoSlide = function () {
+    const now = Date.now();
+    if (now - lastClick < 3000) {
+      mostrarBaloon(clickFrases);
+      return;
+    }
+
+    lastClick = now;
+    lastInteraction = now;
+
+    i++;
+    if (i === frases.length) {
+      encerrar();
+      return;
+    }
+
+    mostrarSlide();
+  };
+
+  function mostrarBaloon(lista) {
+    const msg = lista[Math.floor(Math.random() * lista.length)];
+    const el = document.createElement("div");
+    el.className = "bubble";
+    el.innerText = msg;
+    document.body.appendChild(el);
+    setTimeout(() => el.remove(), 3000);
+  }
+
+  function monitorarTempo() {
+    setInterval(() => {
+      if (Date.now() - lastClick > 3000 && i < frases.length - 1) {
+        mostrarBaloon(tempoFrases);
+        lastInteraction = Date.now();
+      }
+    }, 5000);
+  }
+
+  function gerarParticulas() {
+    const container = document.getElementById("particles");
+    for (let i = 0; i < 40; i++) {
+      const span = document.createElement("span");
+      span.style.left = Math.random() * 100 + "%";
+      span.style.top = Math.random() * 100 + "%";
+      span.style.animationDuration = (5 + Math.random() * 10) + "s";
+      container.appendChild(span);
+    }
+  }
+
+  function encerrar() {
+    document.getElementById("main").style.display = "none";
+    document.body.classList.remove("fundoAtivo");
+    const encerramento = document.getElementById("encerramento");
+    encerramento.classList.remove("hidden");
+    encerramento.style.opacity = 1;
+  }
+});
+</script>
+
+
+
+</body>
+</html>
